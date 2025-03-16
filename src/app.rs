@@ -1,9 +1,9 @@
 use std::rc::Rc;
 use std::time::Duration;
 
+use askama_derive_standalone::derive_template;
 use prettyplease::unparse;
 use proc_macro2::TokenStream;
-use rinja_derive_standalone::derive_template;
 use syn::{parse_quote, parse2};
 use wasm_bindgen::prelude::wasm_bindgen;
 use web_sys::js_sys::{Function, JSON};
@@ -217,39 +217,39 @@ pub fn App() -> Html {
                 >
                     {"Info"}
                     <div tabindex="-1" onblur={|event: FocusEvent| handle_blur(event, "info-menu")}>
-                        <a href="https://crates.io/crates/rinja" title="Crates.io">
+                        <a href="https://crates.io/crates/askama" title="Crates.io">
                             <img
-                                src="https://img.shields.io/crates/v/rinja?logo=rust&style=flat-square&logoColor=white"
+                                src="https://img.shields.io/crates/v/askama?logo=rust&style=flat-square&logoColor=white"
                                 alt="Crates.io"
                             />
                         </a>
                         <a
-                            href="https://github.com/rinja-rs/rinja/actions/workflows/rust.yml"
+                            href="https://github.com/askama-rs/askama/actions/workflows/rust.yml"
                             title="GitHub Workflow Status"
                         >
                             <img
-                                src="https://img.shields.io/github/actions/workflow/status/rinja-rs/rinja/rust.yml?\
+                                src="https://img.shields.io/github/actions/workflow/status/askama-rs/askama/rust.yml?\
                                     branch=master&logo=github&style=flat-square&logoColor=white"
                                 alt="GitHub Workflow Status"
                             />
                         </a>
-                        <a href="https://rinja.readthedocs.io/" title="Book">
+                        <a href="https://askama.readthedocs.io/" title="Book">
                             <img
-                                src="https://img.shields.io/readthedocs/rinja?label=book&logo=readthedocs&style=flat-square&logoColor=white"
+                                src="https://img.shields.io/readthedocs/askama?label=book&logo=readthedocs&style=flat-square&logoColor=white"
                                 alt="Book"
                             />
                         </a>
-                        <a href="https://docs.rs/rinja/" title="docs.rs">
+                        <a href="https://docs.rs/askama/" title="docs.rs">
                             <img
-                                src="https://img.shields.io/docsrs/rinja?logo=docsdotrs&style=flat-square&logoColor=white"
+                                src="https://img.shields.io/docsrs/askama?logo=docsdotrs&style=flat-square&logoColor=white"
                                 alt="docs.rs"
                             />
                         </a>
                         <p>
-                            <strong>{"Rinja Revision:"}</strong>
+                            <strong>{"Askama Revision:"}</strong>
                             <br />
                             <a href={TREE_URL} target="_blank">
-                                {env!("RINJA_DESCR")}
+                                {env!("ASKAMA_DESCR")}
                             </a>
                         </p>
                     </div>
@@ -258,7 +258,7 @@ pub fn App() -> Html {
                     {"Share"}
                 </button>
                 <div id="fork">
-                    <a href="https://github.com/rinja-rs/play-rinja" title="Fork me on GitHub">
+                    <a href="https://github.com/askama-rs/askama_playground" title="Fork me on GitHub">
                         <svg viewBox="0 0 250 250" aria-hidden="true">
                             <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
                             <path fill="currentColor" class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" />
@@ -329,9 +329,9 @@ pub fn App() -> Html {
     }
 }
 
-const THEME_SOURCE_KEY: &str = "play-rinja-theme";
-const STRUCT_SOURCE_KEY: &str = "play-rinja-struct";
-const TMPL_SOURCE_KEY: &str = "play-rinja-template";
+const THEME_SOURCE_KEY: &str = "askama_playground-theme";
+const STRUCT_SOURCE_KEY: &str = "askama_playground-struct";
+const TMPL_SOURCE_KEY: &str = "askama_playground-template";
 
 fn local_storage() -> Option<Storage> {
     window()?.local_storage().unwrap_or_default()
@@ -462,7 +462,7 @@ fn time_it<F: FnOnce() -> R, R>(func: F) -> (R, Option<Duration>) {
 
 const DEFAULT_THEME: &str = "Monokai Extended Origin";
 
-const TREE_URL: &str = concat!(env!("RINJA_URL"), "/tree/", env!("RINJA_REV"));
+const TREE_URL: &str = concat!(env!("ASKAMA_URL"), "/tree/", env!("ASKAMA_REV"));
 
 const TMPL_SOURCE: &str = r##"<div class="example">
     Hello, <strong>{{user}}</strong>!

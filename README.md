@@ -1,7 +1,7 @@
-# play-rinja
+# askama_playground
 
-This is the source code for https://rinja-rs.github.io/play-rinja/ which allows you to
-test the [rinja](https://crates.io/crates/rinja) directly in your web browser.
+This is the source code for https://askama-rs.github.io/askama_playground/ which allows you to
+test the [askama](https://crates.io/crates/askama) directly in your web browser.
 
 To run this website locally:
 
