@@ -4,19 +4,19 @@ use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 
 fn main() {
-    let mut rinja = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
-    rinja.push("rinja");
+    let mut askama = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
+    askama.push("askama");
 
-    println!("cargo::rerun-if-changed=.git/modules/rinja/refs/heads/master");
+    println!("cargo::rerun-if-changed=.git/modules/askama/refs/heads/master");
     git_run(
-        "RINJA_DESCR",
-        &rinja,
+        "ASKAMA_DESCR",
+        &askama,
         ["describe", "--tags", "--long", "HEAD"],
     );
-    git_run("RINJA_REV", &rinja, ["rev-parse", "HEAD"]);
+    git_run("ASKAMA_REV", &askama, ["rev-parse", "HEAD"]);
 
-    println!("cargo::rerun-if-changed=.git/modules/rinja/config");
-    git_run("RINJA_URL", &rinja, ["remote", "get-url", "origin"]);
+    println!("cargo::rerun-if-changed=.git/modules/askama/config");
+    git_run("ASKAMA_URL", &askama, ["remote", "get-url", "origin"]);
 }
 
 #[track_caller]

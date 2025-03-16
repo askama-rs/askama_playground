@@ -1,4 +1,4 @@
-[submodule "rinja"]
-	path = rinja
-	url = https://github.com/rinja-rs/rinja
+[submodule "askama"]
+	path = askama
+	url = https://github.com/askama-rs/askama
 	branch = master
