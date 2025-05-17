@@ -1,9 +1,10 @@
 use std::rc::Rc;
 use std::time::Duration;
 
-use askama_derive_standalone::derive_template;
+use askama_derive::derive_template;
 use prettyplease::unparse;
 use proc_macro2::TokenStream;
+use quote::quote;
 use syn::{parse_quote, parse2};
 use wasm_bindgen::prelude::wasm_bindgen;
 use web_sys::js_sys::{Function, JSON};
@@ -442,10 +443,16 @@ fn replace_timeout(new_state: &mut Props, state: UseStateHandle<Props>) {
 fn convert_source(rust: &str, tmpl: &str) -> (String, Option<Duration>) {
     let mut code: TokenStream = parse_quote! { #[template(source = #tmpl)] };
     code.extend(rust.parse::<TokenStream>());
-    let (code, duration) = time_it(|| derive_template(code));
+    let (code, duration) = time_it(|| derive_template(code, import_askama));
     let mut code = unparse(&parse2(code).unwrap_at());
     code.truncate(code.trim_end().len());
     (code, duration)
+}
+
+fn import_askama() -> TokenStream {
+    quote! {
+        extern crate askama;
+    }
 }
 
 fn time_it<F: FnOnce() -> R, R>(func: F) -> (R, Option<Duration>) {
