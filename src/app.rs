@@ -108,11 +108,11 @@ pub fn App() -> Html {
             .map(Rc::clone)
             .map(|saved_url| move |_: MouseEvent| save_clipboard(&saved_url));
 
-        if saved_url.is_some() {
-            if let Some(share_dialog) = share_dialog() {
-                let share_dialog: HtmlDialogElement = share_dialog.unchecked_into();
-                let _ = share_dialog.show_modal();
-            }
+        if saved_url.is_some()
+            && let Some(share_dialog) = share_dialog()
+        {
+            let share_dialog: HtmlDialogElement = share_dialog.unchecked_into();
+            let _ = share_dialog.show_modal();
         }
     };
 
@@ -339,11 +339,11 @@ fn local_storage() -> Option<Storage> {
 }
 
 fn save_to_local_storage(storage: &Storage, key: &str, data: &str) {
-    if let Ok(data) = JSON::stringify(&JsValue::from_str(data)) {
-        if let Some(data) = data.as_string() {
-            // Doesn't matter whether or not it succeeded.
-            let _ = storage.set_item(key, &data);
-        }
+    if let Ok(data) = JSON::stringify(&JsValue::from_str(data))
+        && let Some(data) = data.as_string()
+    {
+        // Doesn't matter whether or not it succeeded.
+        let _ = storage.set_item(key, &data);
     }
 }
 

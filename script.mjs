@@ -14,7 +14,7 @@ window.gen_saved_url = function (callback) {
             const base64 = btoa(String.fromCharCode(...comprBytes));
             const urlsafe = base64.replace(
                 /[+/=]/g,
-                (c) => ({ "+": "-", "/": "_", "=": "." }[c])
+                (c) => ({ "+": "-", "/": "_", "=": "" }[c])
             );
             const url = new URL("?saved=" + urlsafe, location);
             resolve(String(url));
