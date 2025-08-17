@@ -7,14 +7,14 @@ repository = "https://github.com/Kijewski/askama_playground"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-askama_derive = { version = "*", path = "askama/askama_derive", default-features = false, features = ["serde_json", "std", "urlencode"] }
+askama_derive = { version = "*", path = "askama/askama_derive", default-features = false, features = ["blocks", "serde_json", "std", "urlencode"] }
 
 console_error_panic_hook = "0.1.7"
 once_cell = "1.21.3"
 prettyplease = "0.2.36"
-proc-macro2 = { version = "1.0.95", default-features = false }
+proc-macro2 = { version = "1.0.101", default-features = false }
 quote = { version = "1.0.40", default-features = false }
-syn = { version = "2.0.104", default-features = false, features = ["full", "parsing", "printing"] }
+syn = { version = "2.0.106", default-features = false, features = ["full", "parsing", "printing"] }
 syntect = { version = "5.2.0", default-features = false, features = ["parsing", "regex-fancy"] }
 syntect-assets = { version = "0.23.6", default-features = false, features = ["regex-fancy"] }
 wasm-bindgen = "0.2.100"
