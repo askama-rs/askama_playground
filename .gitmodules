@@ -1,4 +1,4 @@
 [submodule "askama"]
 	path = askama
 	url = https://github.com/askama-rs/askama
-	branch = master
+	branch = main

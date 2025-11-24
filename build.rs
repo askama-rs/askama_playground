@@ -7,7 +7,7 @@ fn main() {
     let mut askama = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
     askama.push("askama");
 
-    println!("cargo::rerun-if-changed=.git/modules/askama/refs/heads/master");
+    println!("cargo::rerun-if-changed=.git/modules/askama/refs/heads/main");
     git_run(
         "ASKAMA_DESCR",
         &askama,

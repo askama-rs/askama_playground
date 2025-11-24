@@ -230,7 +230,7 @@ pub fn App() -> Html {
                         >
                             <img
                                 src="https://img.shields.io/github/actions/workflow/status/askama-rs/askama/rust.yml?\
-                                    branch=master&logo=github&style=flat-square&logoColor=white"
+                                    branch=main&logo=github&style=flat-square&logoColor=white"
                                 alt="GitHub Workflow Status"
                             />
                         </a>
