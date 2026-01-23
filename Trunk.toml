@@ -8,8 +8,8 @@ inject_scripts = true
 minify = "on_release"
 
 [tools]
-sass = "1.90.0"
-wasm_bindgen = "0.2.100"
+sass = "1.97.3"
+wasm_bindgen = "0.2.108"
 wasm_opt = "version_123"
 
 [clean]

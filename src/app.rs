@@ -11,6 +11,7 @@ use web_sys::js_sys::{Function, JSON};
 use web_sys::wasm_bindgen::prelude::Closure;
 use web_sys::wasm_bindgen::{JsCast, JsValue};
 use web_sys::{FocusEvent, HtmlDialogElement, HtmlSelectElement, Storage, window};
+use yew::virtual_dom::VNode;
 use yew::{
     Callback, Event, Html, MouseEvent, Properties, SubmitEvent, UseStateHandle, function_component,
     html, use_effect_with, use_state,
@@ -103,10 +104,12 @@ pub fn App() -> Html {
             }
         };
 
-        saved_url_copy = saved_url
-            .as_ref()
-            .map(Rc::clone)
-            .map(|saved_url| move |_: MouseEvent| save_clipboard(&saved_url));
+        saved_url_copy = saved_url.as_ref().map(Rc::clone).map(|saved_url| {
+            move |ev: MouseEvent| {
+                save_clipboard(&saved_url);
+                saved_url_close(ev);
+            }
+        });
 
         if saved_url.is_some()
             && let Some(share_dialog) = share_dialog()
@@ -316,7 +319,9 @@ pub fn App() -> Html {
             </form>
             <dialog id="share_dialog" onclose={saved_url_onclose}>
                 <h3> {"Editor State URL"} </h3>
-                <p id="generated-url">{saved_url.as_ref().map(Rc::clone)}</p>
+                <p id="generated-url">{
+                    saved_url.as_ref().map(|u| VNode::VText(Rc::clone(u).into()))
+                }</p>
                 <div class="dialog-buttons">
                     <button type="button" onclick={saved_url_copy} autofocus=true>
                         {"copy"}
